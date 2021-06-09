@@ -1,9 +1,9 @@
 import Head from "next/head";
 
-export default function HeadComp() {
+export default function HeadComp({ title }) {
     return (
         <Head>
-            <title>KCHAT</title>
+            <title>{title || ""}KCHAT</title>
             <meta
                 name="description"
                 content="Kind of WhatsApp Clone using NextJS anf Firebase"
