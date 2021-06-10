@@ -70,7 +70,20 @@ export default function Sidebar() {
     );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+    flex: 0.45;
+    border-right: 1px solid whitesmoke;
+    height: 100vh;
+    min-width: 18rem;
+    max-width: 22rem;
+    overflow-y: scroll;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+`;
 
 const Header = styled.header`
     display: flex;
@@ -103,7 +116,7 @@ const Search = styled.div`
 `;
 
 const SearchInput = styled.input`
-    outline-width: 0;
+    outline: none;
     flex: 1;
     border: none;
 `;

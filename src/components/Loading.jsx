@@ -7,7 +7,7 @@ export default function Loading() {
         >
             <div>
                 <img
-                    src="logo.svg"
+                    src="./logo.svg"
                     alt="Logo"
                     style={{ marginBottom: "1rem", height: "6rem" }}
                 />
