@@ -1,9 +1,9 @@
-import { Avatar, Button } from "@material-ui/core";
 import styled from "styled-components";
 import * as EmailValidator from "email-validator";
-import { auth, db } from "@utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Avatar, Button } from "@material-ui/core";
+import { auth, db } from "@utils/firebase";
 import Chat from "@components/Chat";
 
 export default function Sidebar() {

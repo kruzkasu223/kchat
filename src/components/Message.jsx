@@ -1,7 +1,7 @@
-import { auth } from "@utils/firebase";
-import moment from "moment";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
+import moment from "moment";
+import { auth } from "@utils/firebase";
 
 export default function Message({ user, message }) {
     const [userLoggedIn] = useAuthState(auth);

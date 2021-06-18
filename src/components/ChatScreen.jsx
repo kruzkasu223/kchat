@@ -1,15 +1,15 @@
-import { Avatar, IconButton } from "@material-ui/core";
-import { auth, db } from "@utils/firebase";
+import { useEffect, useRef, useState } from "react";
+import firebase from "firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { useCollection } from "react-firebase-hooks/firestore";
-import Message from "@components/Message";
-import { useEffect, useRef, useState } from "react";
-import SendIcon from "@material-ui/icons/Send";
-import firebase from "firebase";
-import getRecipientEmail from "@utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
+import { Avatar, IconButton } from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
+import Message from "@components/Message";
+import { auth, db } from "@utils/firebase";
+import getRecipientEmail from "@utils/getRecipientEmail";
 
 export default function ChatScreen({ chat, messages }) {
     const [user] = useAuthState(auth);
@@ -177,8 +177,6 @@ const HeaderInfo = styled.div`
         color: gray;
     }
 `;
-
-const HeaderIcons = styled.div``;
 
 const EndOfMessages = styled.div`
     margin-bottom: 4rem;

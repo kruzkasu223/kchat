@@ -1,10 +1,10 @@
-import { Avatar } from "@material-ui/core";
-import { auth, db } from "@utils/firebase";
-import getRecipientEmail from "@utils/getRecipientEmail";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import { Avatar } from "@material-ui/core";
+import { auth, db } from "@utils/firebase";
+import getRecipientEmail from "@utils/getRecipientEmail";
 
 export default function Chat({ id, users }) {
     const router = useRouter();

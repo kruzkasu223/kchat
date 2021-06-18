@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import HeadComp from "@components/HeadComp";
 import { Button } from "@material-ui/core";
 import { auth, provider } from "@utils/firebase";
+import HeadComp from "@components/HeadComp";
 import Logo from "@assets/logo.svg";
 
 export default function Login() {
