@@ -1,4 +1,5 @@
 import { Circle } from "better-react-spinkit";
+import Logo from '@assets/logo.svg'
 
 export default function Loading() {
     return (
@@ -6,8 +7,7 @@ export default function Loading() {
             style={{ display: "grid", placeItems: "center", height: "100vh" }}
         >
             <div>
-                <img
-                    src="./logo.svg"
+                <Logo
                     alt="Logo"
                     style={{ marginBottom: "1rem", height: "6rem" }}
                 />

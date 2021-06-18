@@ -185,13 +185,14 @@ const HeaderInfo = styled.div`
 const HeaderIcons = styled.div``;
 
 const EndOfMessages = styled.div`
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 `;
 
 const MessageContainer = styled.div`
     padding: 2rem;
+    padding-top: 10rem;
     background-color: #eee;
-    min-height: 90vh;
+    height: 90vh;
     overflow-y: scroll;
 `;
 

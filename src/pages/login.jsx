@@ -2,6 +2,7 @@ import styled from "styled-components";
 import HeadComp from "@components/HeadComp";
 import { Button } from "@material-ui/core";
 import { auth, provider } from "@utils/firebase";
+import Logo from "@assets/logo.svg";
 
 export default function Login() {
     const logIn = () => {
@@ -13,7 +14,7 @@ export default function Login() {
             <HeadComp title="Login | " />
             <LoginContainer>
                 <h1>LOGIN TO KCHAT</h1>
-                <Logo src="logo.svg" />
+                <Logodiv />
                 <Button onClick={logIn} variant="outlined">
                     Login with Google
                 </Button>
@@ -44,8 +45,7 @@ const LoginContainer = styled.div`
     }
 `;
 
-const Logo = styled.img`
-    width: 12rem;
-    height: 12rem;
+const Logodiv = styled(Logo)`
+    height: 5rem;
     margin-bottom: 1rem;
 `;
