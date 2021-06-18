@@ -40,8 +40,6 @@ export default function ChatScreen({ chat, messages }) {
         });
     };
 
-    useEffect(() => scrollToBottom(), [showMessages]);
-
     const showMessages = () => {
         if (messagesSnapshot) {
             return messagesSnapshot.docs.map((message) => (
@@ -64,6 +62,8 @@ export default function ChatScreen({ chat, messages }) {
             ));
         }
     };
+
+    useEffect(() => scrollToBottom(), [showMessages]);
 
     const sendMessage = (e) => {
         e.preventDefault();
