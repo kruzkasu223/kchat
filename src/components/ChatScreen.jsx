@@ -1,6 +1,4 @@
 import { Avatar, IconButton } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { auth, db } from "@utils/firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -19,6 +17,7 @@ export default function ChatScreen({ chat, messages }) {
     const [input, setInput] = useState("");
     const enterToClick = useRef(null);
     const endOfMsgsRef = useRef(null);
+    const autoFocusInput = useRef(null);
     const recipientEmail = getRecipientEmail(chat.users, user);
     const [recipientSnapshot] = useCollection(
         db.collection("users").where("email", "==", recipientEmail)
@@ -32,6 +31,10 @@ export default function ChatScreen({ chat, messages }) {
             .collection("messages")
             .orderBy("timestamp", "asc")
     );
+
+    useEffect(() => {
+        autoFocusInput.current.focus();
+    }, [router]);
 
     const scrollToBottom = () => {
         endOfMsgsRef.current.scrollIntoView({
@@ -120,14 +123,6 @@ export default function ChatScreen({ chat, messages }) {
                         <p>Last Seen: Loading...</p>
                     )}
                 </HeaderInfo>
-                <HeaderIcons>
-                    <IconButton>
-                        <AttachFileIcon />
-                    </IconButton>
-                    <IconButton>
-                        <MoreVertIcon />
-                    </IconButton>
-                </HeaderIcons>
             </Header>
 
             <MessageContainer>
@@ -140,6 +135,7 @@ export default function ChatScreen({ chat, messages }) {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Write a Message"
+                    ref={autoFocusInput}
                 />
                 <IconButton
                     disabled={!input}

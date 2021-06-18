@@ -1,8 +1,5 @@
-import { Avatar, Button, IconButton } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import styled from "styled-components";
-import ChatIcon from "@material-ui/icons/Chat";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import SearchIcon from "@material-ui/icons/Search";
 import * as EmailValidator from "email-validator";
 import { auth, db } from "@utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -42,24 +39,12 @@ export default function Sidebar() {
     return (
         <Container>
             <Header>
-                <UserAvatar
-                    src={user.photoURL}
-                    onClick={() => auth.signOut()}
-                />
-                <IconsContainer>
-                    <IconButton>
-                        <ChatIcon />
-                    </IconButton>
-                    <IconButton>
-                        <MoreVertIcon />
-                    </IconButton>
-                </IconsContainer>
+                <UserDetails>
+                    <UserAvatar src={user.photoURL} />
+                    <UserName>{user.email.split("@")[0]}</UserName>
+                </UserDetails>
+                <LGButton onClick={() => auth.signOut()}>LOG OUT</LGButton>
             </Header>
-
-            <Search>
-                <SearchIcon />
-                <SearchInput placeholder="Search in Chats" />
-            </Search>
 
             <SidebarButton onClick={createChat}>Start a New Chat</SidebarButton>
 
@@ -98,34 +83,39 @@ const Header = styled.header`
     border-bottom: 1px solid whitesmoke;
 `;
 
-const UserAvatar = styled(Avatar)`
-    cursor: pointer;
-
-    &:hover {
-        opacity: 0.8;
-    }
-`;
-
-const IconsContainer = styled.div``;
-
-const Search = styled.div`
+const UserDetails = styled.div`
     display: flex;
     align-items: center;
-    padding: 1.25rem;
-    border-radius: 0.125rem;
 `;
 
-const SearchInput = styled.input`
-    outline: none;
-    flex: 1;
-    border: none;
+const UserAvatar = styled(Avatar)`
+    margin-right: 0.5rem;
+`;
+
+const UserName = styled.span`
+    text-transform: uppercase;
+    word-break: break-word;
+    padding-top: 0.25rem;
 `;
 
 const SidebarButton = styled(Button)`
     width: 100%;
 
     &&& {
+        background-color: whitesmoke;
         border-top: 1px solid whitesmoke;
         border-bottom: 1px solid whitesmoke;
+
+        &:hover {
+            filter: brightness(95%);
+        }
+    }
+`;
+
+const LGButton = styled(Button)`
+    &&& {
+        border: 2px solid whitesmoke;
+        min-width: fit-content;
+        margin-left: 0.5rem;
     }
 `;
