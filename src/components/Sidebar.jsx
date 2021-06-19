@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import * as EmailValidator from "email-validator";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -7,14 +9,19 @@ import { auth, db } from "@utils/firebase";
 import Chat from "@components/Chat";
 
 export default function Sidebar() {
+    const router = useRouter();
     const [user] = useAuthState(auth);
     const userChatRef = db
         .collection("chats")
         .where("users", "array-contains", user.email);
     const [chatsSnapshot] = useCollection(userChatRef);
+    const [primary, setPrimary] = useState(true);
+    useEffect(() => {
+        setPrimary(router.asPath === "/" ? true : false);
+    }, []);
 
     const createChat = () => {
-        const input = prompt("Please Enter an Email of User to Add to Chat.");
+        const input = prompt("Please Enter an Email of User to Add to Chat:");
 
         if (!input) return null;
 
@@ -37,7 +44,7 @@ export default function Sidebar() {
         );
 
     return (
-        <Container>
+        <Container primary={primary}>
             <Header>
                 <UserDetails>
                     <UserAvatar src={user.photoURL} />
@@ -68,6 +75,12 @@ const Container = styled.div`
     }
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+    @media (max-width: 700px) {
+        display: ${(props) => (props.primary ? "block" : "none")};
+        width: 100%;
+        max-width: 100%;
+    }
 `;
 
 const Header = styled.header`
@@ -96,19 +109,15 @@ const UserName = styled.span`
     text-transform: uppercase;
     word-break: break-word;
     padding-top: 0.25rem;
+    font-weight: bold;
 `;
 
 const SidebarButton = styled(Button)`
     width: 100%;
 
     &&& {
-        background-color: whitesmoke;
         border-top: 1px solid whitesmoke;
         border-bottom: 1px solid whitesmoke;
-
-        &:hover {
-            filter: brightness(95%);
-        }
     }
 `;
 

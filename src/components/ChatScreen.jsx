@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import firebase from "firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -7,6 +8,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import TimeAgo from "timeago-react";
 import { Avatar, IconButton } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Message from "@components/Message";
 import { auth, db } from "@utils/firebase";
 import getRecipientEmail from "@utils/getRecipientEmail";
@@ -100,10 +102,15 @@ export default function ChatScreen({ chat, messages }) {
     return (
         <Container>
             <Header>
+                <Link href="/">
+                    <IconButton>
+                        <ArrowBackIcon />
+                    </IconButton>
+                </Link>
                 {recipient ? (
-                    <Avatar src={recipient.photoURL} />
+                    <UserAvatar src={recipient.photoURL} />
                 ) : (
-                    <Avatar>{recipientEmail[0].toUpperCase()}</Avatar>
+                    <UserAvatar>{recipientEmail[0].toUpperCase()}</UserAvatar>
                 )}
 
                 <HeaderInfo>
@@ -152,6 +159,10 @@ export default function ChatScreen({ chat, messages }) {
 
 const Container = styled.div``;
 
+const UserAvatar = styled(Avatar)`
+    margin-left: 0.5rem;
+`;
+
 const Header = styled.header`
     position: sticky;
     background-color: white;
@@ -170,6 +181,7 @@ const HeaderInfo = styled.div`
 
     h4 {
         margin-bottom: 0.125rem;
+        word-break: break-word;
     }
 
     p {
@@ -188,6 +200,11 @@ const MessageContainer = styled.div`
     background-color: #eee;
     height: 90vh;
     overflow-y: scroll;
+
+    @media (max-width: 700px) {
+        padding: 1rem;
+        padding-top: 10rem;
+    }
 `;
 
 const InputContainer = styled.div`
@@ -209,4 +226,8 @@ const Input = styled.input`
     padding: 1.25rem;
     margin: 0 1rem;
     font-size: 1rem;
+
+    @media (max-width: 700px) {
+        width: 80%;
+    }
 `;

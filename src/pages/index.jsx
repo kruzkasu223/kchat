@@ -5,10 +5,7 @@ export default function Home() {
     return (
         <div>
             <HeadComp />
-
             <Sidebar />
-
-            <h1>Welcome to KCHAT!</h1>
         </div>
     );
 }
